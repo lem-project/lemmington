@@ -1,3 +1,4 @@
+![](https://github.com/Sasanidas/lemmigton/blob/master/icon.png)
 # Lemmington
 
 This is a package for RPC integrations with from GNU Emacs to  [Lem](https://github.com/lem-project/lem).
