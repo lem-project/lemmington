@@ -17,5 +17,7 @@ For now, add the files to GNU Emacs load-path
 
 To start the server call `lemmington-start-server`, the default port is 55486, every other function is meant to be called from Lem.
 
+It can also be used with https://codeberg.org/sasanidas/eltr so the REPL is in sync with the Emacs behind
+
 
 
