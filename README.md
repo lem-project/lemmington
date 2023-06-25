@@ -7,10 +7,7 @@ This is a package for RPC integrations with from GNU Emacs to  [Lem](https://git
 For now, add the files to GNU Emacs load-path
 
 ```elisp
-
-
 (add-to-list 'load-path "/path/to/lemmington/")
-
 
 ```
 
