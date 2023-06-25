@@ -30,16 +30,17 @@
 
 (require 'cl-lib)
 (require 'porthole)
+(require 'elisp-refs)
 
 ;; (lem-symbol-location "goto-char")
 ;; (lem-symbol-location "pi")
 ;; (lem-symbol-location "asdasd")
 
 (cl-defun lemmington-start-server (&key
-				   (name "lemmington-server")
-				   (port 55486)
-				   (username "lem")
-				   (password "lem"))
+			 (name "lemmington-server")
+			 (port 55486)
+			 (username "lem")
+			 (password "lem"))
   "Start the porthole server.
 Optionally, you can set as a key argument:
 NAME : name of the server.
@@ -56,29 +57,31 @@ PASSWORD: password for the basic-auth."
    :publish-password t))
 
 
-(cl-defun lem-get-completion (prefix)
+(cl-defun lemmington-get-completion (prefix)
   "Return a list of symbols with PREFIX as prefix."
   (elisp-refs--filter-obarray (lambda (i)
 				(string-prefix-p prefix (format "%s" i) t))))
 
-(cl-defun lem-symbol-location (symbol)
+;;TODO: Fix this ugly ignore errors
+(cl-defun lemmington-symbol-location (symbol)
   "Return a a list of (file absolute-position) of SYMBOL."
-  (let ((symbol-intern (intern-soft symbol))
-	symbol-info)
-    (cond
-     ((functionp symbol-intern)
-      (setf symbol-info
-	    (find-definition-noselect symbol-intern nil)))
-     ((boundp symbol-intern)
-      (setf symbol-info
-	    (find-definition-noselect symbol-intern 'defvar)))
-     (t
-      (cl-return-from lem-symbol-location
-	nil)))
-    (list (buffer-file-name (car symbol-info))
-	  (cdr symbol-info))))
+  (ignore-errors
+    (let ((symbol-intern (intern-soft symbol))
+	  symbol-info)
+      (cond
+       ((functionp symbol-intern)
+	(setf symbol-info
+	      (find-definition-noselect symbol-intern nil)))
+       ((boundp symbol-intern)
+	(setf symbol-info
+	      (find-definition-noselect symbol-intern 'defvar)))
+       (t
+	(cl-return-from lem-symbol-location
+	  nil)))
+      (list (buffer-file-name (car symbol-info))
+	    (cdr symbol-info)))))
 
-(cl-defun lem-symbol-documentation (symbol)
+(cl-defun lemmington-symbol-documentation (symbol)
   "Return SYMBOL documentation."
   (let ((symbol-intern (intern-soft symbol)))
     (cond
@@ -91,14 +94,18 @@ PASSWORD: password for the basic-auth."
 	nil)))))
 
 (defvar *lemmigton-export-functions*
-  '(lem-get-completion
-    lem-symbol-location
-    lem-symbol-documentation))
+  '(lemmington-get-completion
+    lemmington-symbol-location
+    lemmington-symbol-documentation))
 
 (cl-defun lemmington-export-functions (&key
-				       (server "lemmington-server")
-				       (functions *lem-emacs-export-functions*))
+			     (server "lemmington-server")
+			     (functions *lemmigton-export-functions*))
   "Export FUNCTIONS to SERVER."
   (mapcar (lambda (fname)
 	    (porthole-expose-function server fname))
 	  functions))
+
+(provide 'lemmington)
+
+;;; lemmington.el ends here
