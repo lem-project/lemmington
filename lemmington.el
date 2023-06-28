@@ -1,4 +1,4 @@
-;;; lemmington.el --- RPC Emacs server and REPL             -*- lexical-binding: t; -*-
+;;; lemmington.el --- RPC Emacs server            -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023 Fermin Munoz
 
