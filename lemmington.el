@@ -32,9 +32,15 @@
 (require 'porthole)
 (require 'elisp-refs)
 
-;; (lem-symbol-location "goto-char")
-;; (lem-symbol-location "pi")
-;; (lem-symbol-location "asdasd")
+(defgroup lemmington nil
+  "Lemmington group."
+  :group 'lemmington
+  :link '(url-link :tag "Repository" "https://github.com/lem-project/lemmigton.git"))
+
+(defcustom lemmington-user-export-functions nil
+  "User defined functions to export."
+  :group 'lemmington
+  :type 'list)
 
 (cl-defun lemmington-start-server (&key
 			 (name "lemmington-server")
@@ -93,10 +99,15 @@ PASSWORD: password for the basic-auth."
       (cl-return-from lem-symbol-documentation
 	nil)))))
 
+(cl-defun lemmington-exported-functions ()
+  (append *lemmigton-export-functions*
+	  lemmington-user-export-functions))
+
 (defvar *lemmigton-export-functions*
   '(lemmington-get-completion
     lemmington-symbol-location
-    lemmington-symbol-documentation))
+    lemmington-symbol-documentation
+    lemmington-exported-functions))
 
 (cl-defun lemmington-export-functions (&key
 			     (server "lemmington-server")
@@ -104,7 +115,7 @@ PASSWORD: password for the basic-auth."
   "Export FUNCTIONS to SERVER."
   (mapcar (lambda (fname)
 	    (porthole-expose-function server fname))
-	  functions))
+	  (append functions lemmington-user-export-functions)))
 
 (provide 'lemmington)
 
