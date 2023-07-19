@@ -7,7 +7,7 @@
 ;; Created: 25 June 2023
 ;; Version: 0.0.1
 ;; Keywords: tools,languages
-;; URL: https://codeberg.org/sasanidas/lemmigton
+;; URL: https://github.com/lem-project/lemmington.git
 ;; Package-Requires: ((emacs "27.1")(porthole "0.3.0"))
 ;; License: GPL-3.0-or-later
 
@@ -35,7 +35,7 @@
 (defgroup lemmington nil
   "Lemmington group."
   :group 'lemmington
-  :link '(url-link :tag "Repository" "https://github.com/lem-project/lemmigton.git"))
+  :link '(url-link :tag "Repository" "https://github.com/lem-project/lemmington.git"))
 
 (defcustom lemmington-user-export-functions nil
   "User defined functions to export."
@@ -100,10 +100,10 @@ PASSWORD: password for the basic-auth."
 	nil)))))
 
 (cl-defun lemmington-exported-functions ()
-  (append *lemmigton-export-functions*
+  (append *lemmington-export-functions*
 	  lemmington-user-export-functions))
 
-(defvar *lemmigton-export-functions*
+(defvar *lemmington-export-functions*
   '(lemmington-get-completion
     lemmington-symbol-location
     lemmington-symbol-documentation
@@ -111,7 +111,7 @@ PASSWORD: password for the basic-auth."
 
 (cl-defun lemmington-export-functions (&key
 			     (server "lemmington-server")
-			     (functions *lemmigton-export-functions*))
+			     (functions *lemmington-export-functions*))
   "Export FUNCTIONS to SERVER."
   (mapcar (lambda (fname)
 	    (porthole-expose-function server fname))
