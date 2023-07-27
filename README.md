@@ -1,5 +1,6 @@
-![](./icon.png)
 [![JCS-ELPA](https://raw.githubusercontent.com/jcs-emacs/badges/master/elpa/v/lemmington.svg)](https://jcs-emacs.github.io/jcs-elpa/#/lemmington)
+
+<a href="#"><img align="right" src="./icon.png" width="20%"></a>
 
 # Lemmington
 
