@@ -8,7 +8,7 @@
 ;; Version: 0.0.1
 ;; Keywords: tools,languages
 ;; URL: https://github.com/lem-project/lemmington.git
-;; Package-Requires: ((emacs "27.1")(porthole "0.3.0"))
+;; Package-Requires: ((emacs "27.1")(porthole "0.3.0")(elisp-refs "1.6"))
 ;; License: GPL-3.0-or-later
 
 ;; This program is free software; you can redistribute it and/or modify
