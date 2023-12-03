@@ -51,3 +51,20 @@ or
 To start the server call `lemmington-start-server` and `lemmington-export-functions`, the default port is 55486, every other function is meant to be called from Lem.
 
 To connect to the Emacs server from Lem, call the function `(lem-elisp-mode/rpc:connect-to-server)`, this should enable the RPC calls.
+
+## License
+
+Copyright (C) 2023 Fermin Munoz and contributors
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
